@@ -14,14 +14,28 @@ int keyControl();
 void init();
 void titleDraw();		// 타이틀 제목 출력
 int menuDraw();		//메인 메뉴 출력
+void infoDraw();
 void gotoxy(int, int);	//마우스 커서를 이동
 
 int main()
 {
 	init();
-	titleDraw();
-	int menuCode = menuDraw();
-	printf("선택한 메뉴: %d\n", menuCode);
+	while (true)
+	{
+		titleDraw();
+		int menuCode = menuDraw();
+		if (menuCode == 0) {
+			// 게임시작
+		}
+		else if (menuCode == 1) {
+			infoDraw();	// 게임정보
+		}
+		else if (menuCode == 2) {
+			return 0;	// 종료
+		}
+		system("cls");		// 콘솔창의 모든글자 클리어. 콘솔 좌표 0,0 으로 초기화
+	}
+	
 	return 0;
 }
 
@@ -86,6 +100,23 @@ int menuDraw()
 				return y - 12;
 				// y 시작 위치가 12였으므로 y-12를 하면 0, 1, 2 세 숫자를 받아올 수 있다.
 			}
+		}
+	}
+}
+
+void infoDraw()
+{
+	system("cls");	// 화면 모두 지우기
+	printf("\n\n\n");
+	printf("                         [ 조작법 ]\n\n");
+	printf("                    이동 : W, A, S, D\n");
+	printf("                    선택 : 스페이스바 \n\n\n\n\n\n\n\n");
+	printf("       스페이스바를 누르면 메인화면으로 이동합니다.");
+
+	while (true)
+	{
+		if (keyControl() == SUBMIT) {
+			break;
 		}
 	}
 }
